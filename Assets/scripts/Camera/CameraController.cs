@@ -25,7 +25,7 @@ public class CameraController : MonoBehaviour
             RaycastHit hitInfo;
             if (Physics.Raycast(ray, out hitInfo))
             {
-                Debug.Log(hitInfo.transform.name);
+                //Debug.Log(hitInfo.transform.name);
             }
         }
         // 旋转 鼠标右键
