@@ -50,13 +50,18 @@ public class CameraController : MonoBehaviour
         //空格键抬升高度
         if (Input.GetKey(KeyCode.Space))
         {
-            transform.position = new Vector3(transform.position.x, transform.position.y + speed  * Time.deltaTime, transform.position.z);
+            //shift键+空格键降低高度
+            if (Input.GetKey(KeyCode.LeftShift))
+            {
+                transform.position = new Vector3(transform.position.x, transform.position.y - speed * Time.deltaTime, transform.position.z);
+            }
+            else
+            {
+                transform.position = new Vector3(transform.position.x, transform.position.y + speed * Time.deltaTime, transform.position.z);
+            }
+           
         }
-        //shift键降低高度
-        if (Input.GetKey(KeyCode.LeftShift))
-        {
-            transform.position = new Vector3(transform.position.x, transform.position.y - speed  * Time.deltaTime, transform.position.z);
-        }
+
         //w键前进
         if (Input.GetKey(KeyCode.W))
         {

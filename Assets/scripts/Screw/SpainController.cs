@@ -4,14 +4,22 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
-
+/// <summary>
+/// 粗准焦螺旋 360°1mm
+/// 细准焦螺旋 360°0.01mm
+/// </summary>
 public class SpainController : MonoBehaviour
 {
-    public float speed = 5;
+    public float SPEED = 5;//5度每秒
     private float angle = 0f;
+    private float I;
     public Text txt;
     public DateTime LastTime ;
     public bool IsTextActive = false;
+    public GameObject M1;//主尺   Z 0.8-1.4                                                                                                                              
+    public GameObject M2;//读数窗口
+    public GameObject M3;//微动手轮
+    public GameObject M4;//粗动手轮
     private String ObjectName;
 
 
@@ -79,9 +87,11 @@ public class SpainController : MonoBehaviour
         {
             case "Spain_large":
                 ObjectName = "粗螺旋";
+                I = 1f/360;
                 break;
             case "Spain_small":
                 ObjectName = "细螺旋";
+                I = 0.01f/360;
                 break;
             default:
                 ObjectName = gameObject.name;
@@ -94,18 +104,50 @@ public class SpainController : MonoBehaviour
         JudgeIsArrival();
         if (IsClick)
         {
+            float speed = SPEED;
             if (Input.GetKey(KeyCode.Q))
             {
-                angle -= speed * Time.deltaTime;
-                this.transform.Rotate(new Vector3(0, 0, -speed * Time.deltaTime));
-                SetText(ObjectName + "角度为：" + angle.ToString());
+                if (Input.GetKey(KeyCode.LeftShift))
+                {
+                    speed = SPEED * 10;
+                }
+                if(GlobalVariable.d - speed * Time.deltaTime  * I > 0)
+                {
+                    angle -= speed * Time.deltaTime;
+                    GlobalVariable.d -= speed * Time.deltaTime  * I;
+                    M1.transform.Translate(-Vector3.forward * speed * Time.deltaTime * I * (1.4f - 0.8f) / GlobalVariable.MAX/2);
+                    M2.transform.Rotate(new Vector3(0, 0, -speed * Time.deltaTime * I * 360));
+                    if (gameObject.name.Contains("small"))
+                    {
+                        M3.transform.Rotate(new Vector3(0, 0, -speed * Time.deltaTime * I * 360 / 0.01f));
+                    }
+                    M4.transform.Rotate(new Vector3(0, 0, -speed * Time.deltaTime * I * 360));
+                    SetText(ObjectName + "角度为：" + angle.ToString()+ "    M2读数为：" + GlobalVariable.d.ToString());
+                } 
 
+                //2.5  1.1
             }
+
             if (Input.GetKey(KeyCode.E))
             {
-                angle += speed * Time.deltaTime;
-                this.transform.Rotate(new Vector3(0, 0, speed * Time.deltaTime));
-                SetText(ObjectName + "角度为：" + angle.ToString());
+                if (Input.GetKey(KeyCode.LeftShift))
+                {
+                    speed = SPEED * 10;
+                }
+                if (GlobalVariable.d + speed * Time.deltaTime  * I < GlobalVariable.MAX)
+                {
+                    angle += speed * Time.deltaTime;
+                    GlobalVariable.d += speed * Time.deltaTime  * I;
+                    M1.transform.Translate(Vector3.forward * speed * Time.deltaTime * I * (1.4f - 0.8f) / GlobalVariable.MAX / 2);
+                    M2.transform.Rotate(new Vector3(0, 0, speed * Time.deltaTime * I * 360));
+                    if (gameObject.name.Contains("small"))
+                    {
+                         M3.transform.Rotate(new Vector3(0,0,speed * Time.deltaTime * I * 360 / 0.01f));
+                    }
+                    M4.transform.Rotate(new Vector3(0,0,speed * Time.deltaTime * I * 360));
+                    SetText(ObjectName + "角度为：" + angle.ToString()+"    M2读数为：" + GlobalVariable.d.ToString());
+                }
+
             }
             //if (Input.GetAxis("Mouse ScrollWheel") != 0)
             //{
