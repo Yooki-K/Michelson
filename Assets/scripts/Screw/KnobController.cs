@@ -24,7 +24,8 @@ public class  KnobController: MonoBehaviour
 
     public void OnMouseDown()
     {
-        this.IsDown = true;
+        if (MessageBox.state == -1)
+            this.IsDown = true;
     }
 
     public void OnMouseUp()
