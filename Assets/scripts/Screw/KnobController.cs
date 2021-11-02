@@ -7,12 +7,14 @@ using UnityEngine.UI;
 
 public class  KnobController: MonoBehaviour
 {
-    public float speed = 5;
+    public float SPEED = 2;
     private float angle = 0f;
     public Text txt;
     public DateTime LastTime;
     public bool IsTextActive = false;
     private String ObjectName;
+
+    public Transform M;
 
 
     //click部分
@@ -88,25 +90,57 @@ public class  KnobController: MonoBehaviour
                 ObjectName = gameObject.name;
                 break;
         }
+        M = transform.parent.Find("M1");
+        if (M == null)
+        {
+            M = transform.parent.Find("M2");
+        }
     }
     // Update is called once per frame
     void Update()
     {
         if (IsClick)
         {
-            if (Input.GetKey(KeyCode.Q))
+            Debug.Log(M.gameObject.name);
+            float speed = SPEED;
+            if (Input.GetKey(KeyCode.Q)|| Input.GetKey(KeyCode.E))
             {
-                angle -= speed * Time.deltaTime;
-                this.transform.Rotate(new Vector3(0,90, 0),-speed * Time.deltaTime);
+                if(Input.GetKey(KeyCode.Q))
+                    speed = -SPEED;
+                if (angle + speed * Time.deltaTime < -2.5 || angle + speed * Time.deltaTime > 2.2) return;
+                angle += speed * Time.deltaTime;
+                transform.Rotate(new Vector3(0,90, 0),speed * Time.deltaTime);
+                transform.Translate(new Vector3(0,- speed * Time.deltaTime* 0.001f, 0));
+                switch (gameObject.name.Substring(gameObject.name.Length-1))
+                {
+                    case "1"://上方螺丝
+                        M.Rotate(new Vector3(0,0, speed * Time.deltaTime));
+                        break;
+                    case "2"://右侧螺丝
+                        if(M.name=="M2")
+                            M.Rotate(new Vector3(0, -speed * Time.deltaTime, 0));
+                        else
+                         M.Rotate(new Vector3(0, speed * Time.deltaTime, 0));
+                        break;
+                    case "3"://左侧螺丝
+                        if(M.name=="M2")
+                            M.Rotate(new Vector3(0, speed * Time.deltaTime, 0));
+                        else
+                            M.Rotate(new Vector3(0,- speed * Time.deltaTime, 0));
+                        break;
+                    default:
+                        break;
+                }
                 SetText(ObjectName + "角度为：" + angle.ToString());
 
+
             }
-            if (Input.GetKey(KeyCode.E))
-            {
-                angle += speed * Time.deltaTime;
-                this.transform.Rotate(new Vector3(0,90 , 0), speed * Time.deltaTime);
-                SetText(ObjectName + "角度为：" + angle.ToString());
-            }
+            //if (Input.GetKey(KeyCode.E))
+            //{
+            //    angle += speed * Time.deltaTime;
+            //    this.transform.Rotate(new Vector3(0,90 , 0), speed * Time.deltaTime);
+            //    //SetText(ObjectName + "角度为：" + angle.ToString());
+            //}
         }
 
         JudgeIsArrival();

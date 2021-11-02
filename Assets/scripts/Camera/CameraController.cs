@@ -19,13 +19,14 @@ public class CameraController : MonoBehaviour
 
 
         
-        if (Input.GetMouseButton(0))
+        if (Input.GetMouseButton(0) && Input.GetKey(KeyCode.LeftShift))
         {
             Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
             RaycastHit hitInfo;
             if (Physics.Raycast(ray, out hitInfo))
             {
                 //Debug.Log(hitInfo.transform.name);
+                transform.LookAt(hitInfo.transform);//摄像头转向目标物体
             }
         }
         // 旋转 鼠标右键
@@ -42,12 +43,12 @@ public class CameraController : MonoBehaviour
                 angles.x -= dy;
                 // 设置摄像头旋转
                 Quaternion rotation = Quaternion.identity;
-                rotation.eulerAngles = new Vector3(0, angles.y, 0);
+                //rotation.eulerAngles = new Vector3(0, angles.y, 0);//摄像头只左右旋转
+                rotation.eulerAngles = new Vector3(angles.x, angles.y, 0);//摄像头可上下左右旋转
                 transform.rotation = rotation;
             }
         }
-        //移动
-        //空格键抬升高度
+        //控制摄像头移动
         if (Input.GetKey(KeyCode.Space))
         {
             //shift键+空格键降低高度
@@ -55,13 +56,13 @@ public class CameraController : MonoBehaviour
             {
                 transform.position = new Vector3(transform.position.x, transform.position.y - speed * Time.deltaTime, transform.position.z);
             }
+            //空格键抬升高度
             else
             {
                 transform.position = new Vector3(transform.position.x, transform.position.y + speed * Time.deltaTime, transform.position.z);
             }
            
         }
-
         //w键前进
         if (Input.GetKey(KeyCode.W))
         {

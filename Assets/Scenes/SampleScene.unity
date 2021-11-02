@@ -121,6 +121,45 @@ NavMeshSettings:
     debug:
       m_Flags: 0
   m_NavMeshData: {fileID: 0}
+--- !u!1 &956251 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: -1474613947251495350, guid: ca4b67d46387b2e46b39d1de5fcccc05,
+    type: 3}
+  m_PrefabInstance: {fileID: 89634263}
+  m_PrefabAsset: {fileID: 0}
+--- !u!135 &956253
+SphereCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 956251}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Radius: 0.00012700005
+  m_Center: {x: -4.656613e-10, y: 0.00012700052, z: 0.000000007799828}
+--- !u!114 &956255
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 956251}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 93c8ea5c5c3849a4fb25c89d214b9d68, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  SPEED: 2
+  txt: {fileID: 1208204353}
+  IsTextActive: 0
+  M: {fileID: 0}
+  IsClick: 0
+  IsDown: 0
+  color: {r: 0, g: 0, b: 0, a: 0}
+  ActiveColor: {r: 1, g: 0, b: 0, a: 1}
 --- !u!1001 &89634263
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -218,6 +257,51 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: -5725269128001022467, guid: ca4b67d46387b2e46b39d1de5fcccc05,
+        type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0.001686
+      objectReference: {fileID: 0}
+    - target: {fileID: -5725269128001022467, guid: ca4b67d46387b2e46b39d1de5fcccc05,
+        type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0.005849
+      objectReference: {fileID: 0}
+    - target: {fileID: -5725269128001022467, guid: ca4b67d46387b2e46b39d1de5fcccc05,
+        type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0.001022
+      objectReference: {fileID: 0}
+    - target: {fileID: -5725269128001022467, guid: ca4b67d46387b2e46b39d1de5fcccc05,
+        type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: -5725269128001022467, guid: ca4b67d46387b2e46b39d1de5fcccc05,
+        type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: -5725269128001022467, guid: ca4b67d46387b2e46b39d1de5fcccc05,
+        type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: -5725269128001022467, guid: ca4b67d46387b2e46b39d1de5fcccc05,
+        type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: -5725269128001022467, guid: ca4b67d46387b2e46b39d1de5fcccc05,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: -5725269128001022467, guid: ca4b67d46387b2e46b39d1de5fcccc05,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: -3407678116526451361, guid: ca4b67d46387b2e46b39d1de5fcccc05,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -272,6 +356,46 @@ PrefabInstance:
         type: 3}
       propertyPath: m_IsActive
       value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: -2761298925156004696, guid: ca4b67d46387b2e46b39d1de5fcccc05,
+        type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0.00261
+      objectReference: {fileID: 0}
+    - target: {fileID: -2761298925156004696, guid: ca4b67d46387b2e46b39d1de5fcccc05,
+        type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 0.7071068
+      objectReference: {fileID: 0}
+    - target: {fileID: -2761298925156004696, guid: ca4b67d46387b2e46b39d1de5fcccc05,
+        type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: -2761298925156004696, guid: ca4b67d46387b2e46b39d1de5fcccc05,
+        type: 3}
+      propertyPath: m_LocalRotation.y
+      value: -0.7071068
+      objectReference: {fileID: 0}
+    - target: {fileID: -2761298925156004696, guid: ca4b67d46387b2e46b39d1de5fcccc05,
+        type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: -2761298925156004696, guid: ca4b67d46387b2e46b39d1de5fcccc05,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: -2761298925156004696, guid: ca4b67d46387b2e46b39d1de5fcccc05,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: -90
+      objectReference: {fileID: 0}
+    - target: {fileID: -2761298925156004696, guid: ca4b67d46387b2e46b39d1de5fcccc05,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: -1505551935058469810, guid: ca4b67d46387b2e46b39d1de5fcccc05,
         type: 3}
@@ -378,9 +502,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 93c8ea5c5c3849a4fb25c89d214b9d68, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  speed: 5
+  SPEED: 5
   txt: {fileID: 1208204353}
   IsTextActive: 0
+  M: {fileID: 0}
   IsClick: 0
   IsDown: 0
   color: {r: 0, g: 0, b: 0, a: 0}
@@ -416,9 +541,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 93c8ea5c5c3849a4fb25c89d214b9d68, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  speed: 5
+  SPEED: 5
   txt: {fileID: 1208204353}
   IsTextActive: 0
+  M: {fileID: 0}
   IsClick: 0
   IsDown: 0
   color: {r: 0, g: 0, b: 0, a: 0}
@@ -473,6 +599,45 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 100, y: 100}
   m_Pivot: {x: 0.5, y: 0.5}
+--- !u!1 &410580674 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: -3286694737062065983, guid: ca4b67d46387b2e46b39d1de5fcccc05,
+    type: 3}
+  m_PrefabInstance: {fileID: 89634263}
+  m_PrefabAsset: {fileID: 0}
+--- !u!135 &410580676
+SphereCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 410580674}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Radius: 0.00012700005
+  m_Center: {x: -4.656613e-10, y: 0.00012700028, z: 0.000000007334167}
+--- !u!114 &410580678
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 410580674}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 93c8ea5c5c3849a4fb25c89d214b9d68, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  SPEED: 2
+  txt: {fileID: 1208204353}
+  IsTextActive: 0
+  M: {fileID: 0}
+  IsClick: 0
+  IsDown: 0
+  color: {r: 0, g: 0, b: 0, a: 0}
+  ActiveColor: {r: 1, g: 0, b: 0, a: 1}
 --- !u!1 &654884691
 GameObject:
   m_ObjectHideFlags: 0
@@ -601,10 +766,10 @@ MonoBehaviour:
   SPEED: 5
   txt: {fileID: 1208204353}
   IsTextActive: 0
-  M1: {fileID: 915164015}
-  M2: {fileID: 1124337015}
-  M3: {fileID: 673985928}
-  M4: {fileID: 1270200539}
+  Ruler: {fileID: 0}
+  Reading: {fileID: 0}
+  InchingHandWheel: {fileID: 0}
+  RoughHandWheel: {fileID: 0}
   IsClick: 0
   IsDown: 0
   color: {r: 0, g: 0, b: 0, a: 0}
@@ -863,12 +1028,6 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 373490040430e504e91f9c2769328ba3, type: 3}
---- !u!1 &915164015 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: -8290023996066554002, guid: ca4b67d46387b2e46b39d1de5fcccc05,
-    type: 3}
-  m_PrefabInstance: {fileID: 89634263}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1 &963194225 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 1266015101865497326, guid: 01fd76129f0555d4c91c2e89c52718c2,
@@ -927,6 +1086,45 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   IsDown: 0
+--- !u!1 &1007663157 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 7164334635691557382, guid: ca4b67d46387b2e46b39d1de5fcccc05,
+    type: 3}
+  m_PrefabInstance: {fileID: 89634263}
+  m_PrefabAsset: {fileID: 0}
+--- !u!135 &1007663159
+SphereCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1007663157}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Radius: 0.00012700005
+  m_Center: {x: -4.656613e-10, y: 0.0001270004, z: 0.000000007334167}
+--- !u!114 &1007663161
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1007663157}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 93c8ea5c5c3849a4fb25c89d214b9d68, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  SPEED: 2
+  txt: {fileID: 1208204353}
+  IsTextActive: 0
+  M: {fileID: 0}
+  IsClick: 0
+  IsDown: 0
+  color: {r: 0, g: 0, b: 0, a: 0}
+  ActiveColor: {r: 1, g: 0, b: 0, a: 1}
 --- !u!1 &1012031444
 GameObject:
   m_ObjectHideFlags: 0
@@ -1297,7 +1495,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1124337015}
   m_LocalRotation: {x: 0.4005097, y: 0.58274525, z: -0.4005097, w: 0.58274525}
-  m_LocalPosition: {x: -0.3496, y: 0.92, z: -0.916}
+  m_LocalPosition: {x: -0.34, y: 0.92, z: -0.916}
   m_LocalScale: {x: 0.05664143, y: 0.05664143, z: 0.05664143}
   m_Children: []
   m_Father: {fileID: 0}
@@ -1591,7 +1789,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 0.19607843, g: 0.19607843, b: 0.19607843, a: 1}
+  m_Color: {r: 1, g: 0, b: 0, a: 1}
   m_RaycastTarget: 1
   m_Maskable: 1
   m_OnCullStateChanged:
@@ -1653,10 +1851,10 @@ MonoBehaviour:
   SPEED: 5
   txt: {fileID: 1208204353}
   IsTextActive: 0
-  M1: {fileID: 915164015}
-  M2: {fileID: 1124337015}
-  M3: {fileID: 673985928}
-  M4: {fileID: 1270200539}
+  Ruler: {fileID: 0}
+  Reading: {fileID: 0}
+  InchingHandWheel: {fileID: 0}
+  RoughHandWheel: {fileID: 0}
   IsClick: 0
   IsDown: 0
   color: {r: 0, g: 0, b: 0, a: 0}
@@ -1679,9 +1877,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 93c8ea5c5c3849a4fb25c89d214b9d68, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  speed: 5
+  SPEED: 5
   txt: {fileID: 1208204353}
   IsTextActive: 0
+  M: {fileID: 0}
   IsClick: 0
   IsDown: 0
   color: {r: 0, g: 0, b: 0, a: 0}

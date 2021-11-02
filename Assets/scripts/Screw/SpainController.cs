@@ -16,11 +16,13 @@ public class SpainController : MonoBehaviour
     public Text txt;
     public DateTime LastTime ;
     public bool IsTextActive = false;
-    public GameObject M1;//主尺   Z 0.8-1.4                                                                                                                              
-    public GameObject M2;//读数窗口
-    public GameObject M3;//微动手轮
-    public GameObject M4;//粗动手轮
     private String ObjectName;
+
+    public GameObject Ruler;//主尺   Z 0.8-1.4                                                                                                                              
+    public GameObject Reading;//读数窗口
+    public GameObject InchingHandWheel;//微动手轮
+    public GameObject RoughHandWheel;//粗动手轮
+    
 
 
     //click部分
@@ -115,13 +117,13 @@ public class SpainController : MonoBehaviour
                 {
                     angle -= speed * Time.deltaTime;
                     GlobalVariable.d -= speed * Time.deltaTime  * I;
-                    M1.transform.Translate(-Vector3.forward * speed * Time.deltaTime * I * (1.4f - 0.8f) / GlobalVariable.MAX/2);
-                    M2.transform.Rotate(new Vector3(0, 0, -speed * Time.deltaTime * I * 360));
+                    Ruler.transform.Translate(-Vector3.forward * speed * Time.deltaTime * I * (1.4f - 0.8f) / GlobalVariable.MAX/2);
+                    Reading.transform.Rotate(new Vector3(0, 0, -speed * Time.deltaTime * I * 360));
                     if (gameObject.name.Contains("small"))
                     {
-                        M3.transform.Rotate(new Vector3(0, 0, -speed * Time.deltaTime * I * 360 / 0.01f));
+                        InchingHandWheel.transform.Rotate(new Vector3(0, 0, -speed * Time.deltaTime * I * 360 / 0.01f));
                     }
-                    M4.transform.Rotate(new Vector3(0, 0, -speed * Time.deltaTime * I * 360));
+                    RoughHandWheel.transform.Rotate(new Vector3(0, 0, -speed * Time.deltaTime * I * 360));
                     SetText(ObjectName + "角度为：" + angle.ToString()+ "    M2读数为：" + GlobalVariable.d.ToString());
                 } 
 
@@ -138,13 +140,13 @@ public class SpainController : MonoBehaviour
                 {
                     angle += speed * Time.deltaTime;
                     GlobalVariable.d += speed * Time.deltaTime  * I;
-                    M1.transform.Translate(Vector3.forward * speed * Time.deltaTime * I * (1.4f - 0.8f) / GlobalVariable.MAX / 2);
-                    M2.transform.Rotate(new Vector3(0, 0, speed * Time.deltaTime * I * 360));
+                    Ruler.transform.Translate(Vector3.forward * speed * Time.deltaTime * I * (1.4f - 0.8f) / GlobalVariable.MAX / 2);
+                    Reading.transform.Rotate(new Vector3(0, 0, speed * Time.deltaTime * I * 360));
                     if (gameObject.name.Contains("small"))
                     {
-                         M3.transform.Rotate(new Vector3(0,0,speed * Time.deltaTime * I * 360 / 0.01f));
+                         InchingHandWheel.transform.Rotate(new Vector3(0,0,speed * Time.deltaTime * I * 360 / 0.01f));
                     }
-                    M4.transform.Rotate(new Vector3(0,0,speed * Time.deltaTime * I * 360));
+                    RoughHandWheel.transform.Rotate(new Vector3(0,0,speed * Time.deltaTime * I * 360));
                     SetText(ObjectName + "角度为：" + angle.ToString()+"    M2读数为：" + GlobalVariable.d.ToString());
                 }
 
