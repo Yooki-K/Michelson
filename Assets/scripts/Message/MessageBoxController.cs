@@ -16,14 +16,12 @@ public class MessageBoxController : MonoBehaviour
         int i = 0;
         foreach (var x in MessageBox.agrs)
         {
-            Debug.Log(x);
             if (i == 0)
             {
                 HeadTest.text = x;
             }else{
                AddButton(i, x);
             }
-
             i++;
         }
         MessageBox.state = 1;

@@ -20,17 +20,30 @@ public class PingController : MonoBehaviour
     {
         if (IsDown)
         {
-            if(MessageBox.state == -1)
+            if (GlobalVariable.ActiveName != gameObject.name)
             {
-                //UnityAction[] unityActions = new UnityAction[3];
-                MessageBox.Show(new string[] { "请选择对放大镜进行的操作(ESC键退出)：", "观看", "逆时针旋转90°", "顺时针旋转90°" });
-
-                MessageBox.actions.Add(() =>
+                GlobalVariable.ActiveName = gameObject.name;
+            }
+            if (MessageBox.state == -1)
+            {
+                if(transform.parent.parent.parent.localEulerAngles == new Vector3(0, 180, 0))
                 {
-                    Debug.Log("观看");
-                  MessageBox.state = -1;
+                    MessageBox.Show(new string[] { "请选择对放大镜进行的操作(ESC键退出)：", "观看", "逆时针旋转90°", "顺时针旋转90°" });
+
+                    MessageBox.actions.Add(() =>
+                    {
+                        GlobalVariable.IsLook = true;
+                        Debug.Log("观看");
+                        Debug.Log(transform.parent.parent.parent.localEulerAngles);
+                        MessageBox.state = -1;
      
-                });
+                    });
+                }
+                else
+                {
+                    MessageBox.Show(new string[] { "请选择对放大镜进行的操作(ESC键退出)：", "逆时针旋转90°", "顺时针旋转90°" });
+                }
+
                 MessageBox.actions.Add(() =>
                 {
                     Debug.Log("逆时针旋转90°");

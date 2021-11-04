@@ -19,7 +19,7 @@ public class  KnobController: MonoBehaviour
 
     //click部分
     //begin
-    public bool IsClick = false;
+
     public bool IsDown = false;
     public Color color;
     public Color ActiveColor = Color.red;
@@ -32,21 +32,17 @@ public class  KnobController: MonoBehaviour
 
     public void OnMouseUp()
     {
-
         if (IsDown)
         {
-            if (GetComponent<MeshRenderer>().material.color == color)
+            if (GlobalVariable.ActiveName != gameObject.name)
             {
-                GetComponent<MeshRenderer>().material.color = ActiveColor;
-                IsClick = true;
+                GlobalVariable.ActiveName = gameObject.name;
                 SetText(ObjectName + "角度为：" + angle.ToString());
             }
             else
             {
-                GetComponent<MeshRenderer>().material.color = color;
-                IsClick = false;
+                GlobalVariable.ActiveName = "";
             }
-
             IsDown = false;
         }
     }
@@ -99,8 +95,12 @@ public class  KnobController: MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (IsClick)
+        if (GlobalVariable.ActiveName == gameObject.name)
         {
+            if (GetComponent<MeshRenderer>().material.color != ActiveColor)
+            {
+                GetComponent<MeshRenderer>().material.color = ActiveColor;
+            }
             Debug.Log(M.gameObject.name);
             float speed = SPEED;
             if (Input.GetKey(KeyCode.Q)|| Input.GetKey(KeyCode.E))
@@ -135,14 +135,14 @@ public class  KnobController: MonoBehaviour
 
 
             }
-            //if (Input.GetKey(KeyCode.E))
-            //{
-            //    angle += speed * Time.deltaTime;
-            //    this.transform.Rotate(new Vector3(0,90 , 0), speed * Time.deltaTime);
-            //    //SetText(ObjectName + "角度为：" + angle.ToString());
-            //}
         }
-
+        else
+        {
+            if (GetComponent<MeshRenderer>().material.color == ActiveColor)
+            {
+                GetComponent<MeshRenderer>().material.color = color;
+            }
+        }
         JudgeIsArrival();
 
     }

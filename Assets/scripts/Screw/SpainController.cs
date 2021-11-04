@@ -27,7 +27,7 @@ public class SpainController : MonoBehaviour
 
     //click部分
     //begin
-    public bool IsClick = false;
+
     public bool IsDown = false;
     public Color color;
     public Color ActiveColor = Color.red;
@@ -42,22 +42,17 @@ public class SpainController : MonoBehaviour
     {
         if (IsDown)
         {
-            if (GetComponent<MeshRenderer>().material.color == color)
+            if (GlobalVariable.ActiveName != gameObject.name)
             {
-                GetComponent<MeshRenderer>().material.color = ActiveColor;
-                IsClick = true;
+                GlobalVariable.ActiveName = gameObject.name;
                 SetText(ObjectName + "角度为：" + angle.ToString());
             }
             else
             {
-                GetComponent<MeshRenderer>().material.color = color;
-                IsClick = false;
+                GlobalVariable.ActiveName = "";
             }
-
             IsDown = false;
         }
-
-
     }
     //end
     public void JudgeIsArrival()
@@ -72,7 +67,7 @@ public class SpainController : MonoBehaviour
         return;
     }
 
-
+    
 
     public void SetText(String text)
     {
@@ -104,8 +99,12 @@ public class SpainController : MonoBehaviour
     void Update()
     {
         JudgeIsArrival();
-        if (IsClick)
+        if (GlobalVariable.ActiveName == gameObject.name)
         {
+            if (GetComponent<MeshRenderer>().material.color != ActiveColor)
+            {
+                GetComponent<MeshRenderer>().material.color = ActiveColor;
+            }
             float speed = SPEED;
             if (Input.GetKey(KeyCode.Q))
             {
@@ -127,7 +126,6 @@ public class SpainController : MonoBehaviour
                     SetText(ObjectName + "角度为：" + angle.ToString()+ "    M2读数为：" + GlobalVariable.d.ToString());
                 } 
 
-                //2.5  1.1
             }
 
             if (Input.GetKey(KeyCode.E))
@@ -166,6 +164,13 @@ public class SpainController : MonoBehaviour
             //        this.transform.Rotate(new Vector3(0, 0, speed * Time.deltaTime));
             //    }
             //}
+        }
+        else
+        {
+            if(GetComponent<MeshRenderer>().material.color == ActiveColor)
+            {
+                GetComponent<MeshRenderer>().material.color = color;
+            }
         }
         
 
