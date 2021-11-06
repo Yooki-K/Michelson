@@ -2,7 +2,18 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class GlobalVariable
+public struct Target
+{
+    public Vector3 Point;
+    public Vector3 Direction;
+    public Target(Vector3 Point, Vector3 Direction)
+    {
+        this.Point = Point;
+        this.Direction = Direction;
+    }
+}
+
+public static class GlobalVariable
 {
     //public static float d1;//主尺       mm
     //public static float d2;//读数窗口   0.01mm
@@ -19,5 +30,15 @@ public class GlobalVariable
 
     public static string ActiveName ="";
     public static bool IsLook = false;
-    
+
+    public static int[,] Node = new int[2,2];
+
+    public static Vector3[] Dirs = new Vector3[5];
+    public static Vector3[] Points = new Vector3[5];
+    public static bool[] ISOK = new bool[5];
+
+
+
+    //public static wave = 2*d/n;
+
 }

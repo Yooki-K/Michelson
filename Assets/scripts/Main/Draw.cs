@@ -7,6 +7,7 @@ public class Draw : MonoBehaviour
     
     //保存贴图
     public Image targetMaterial;
+    public bool IsOK = false;
 
     void Start()
     {
@@ -26,22 +27,37 @@ public class Draw : MonoBehaviour
         }
         if(!targetMaterial.gameObject.activeSelf)
             targetMaterial.gameObject.SetActive(true);
-        Chart.Draw(GlobalVariable.R, GlobalVariable.Refractivity, GlobalVariable.WaveLength1, GlobalVariable.WaveLength2, GlobalVariable.d, GlobalVariable.L);
-        //Chart.Draw(GlobalVariable.R, GlobalVariable.Refractivity, GlobalVariable.WaveLength1, GlobalVariable.WaveLength2, 2.5, GlobalVariable.L);
-        int n = Chart.Points.Count;
+        int n = 401;
         Texture2D texture = new Texture2D(n, n);
-        double min = Chart.GetMin(Chart.Points);
-        double max = Chart.GetMax(Chart.Points);
-        //Debug.Log("min "+min);
-        //Debug.Log("max "+max);
-        for (int i = 0; i < Chart.Points.Count; i++)
+        if (IsOK)
         {
+            Chart.Draw(GlobalVariable.R, GlobalVariable.Refractivity, GlobalVariable.WaveLength1, GlobalVariable.WaveLength2, GlobalVariable.d, GlobalVariable.L);
             
-            for (int j = 0; j < Chart.Points[i].Count; j++)
+            
+            double min = Chart.GetMin(Chart.Points);
+            double max = Chart.GetMax(Chart.Points);
+            for (int i = 0; i < Chart.Points.Count; i++)
             {
-                texture.SetPixel(i, j, Chart.GetColorMap(Chart.Points[i][j],min,max) );
+            
+                for (int j = 0; j < Chart.Points[i].Count; j++)
+                {
+                    texture.SetPixel(i, j, Chart.GetColorMap(Chart.Points[i][j],min,max) );
+                }
             }
         }
+        else
+        {
+            Debug.Log(GlobalVariable.Node[0, 0]+" 0 "+ GlobalVariable.Node[0, 1]);
+            for (int i = -25; i <= 25; i++)
+            {
+                for (int j = -25; j <= 25; j++)
+                {
+                    texture.SetPixel(GlobalVariable.Node[0,0]-i, GlobalVariable.Node[0,1]-j, Color.red);//画激光
+                    texture.SetPixel(GlobalVariable.Node[1,0]-i, GlobalVariable.Node[1,1]-j, Color.red);//画激光
+                }
+            }
+        }
+
         //应用贴图
         texture.Apply();
         //将贴图数据赋值给Image的sprite
