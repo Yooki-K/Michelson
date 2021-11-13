@@ -17,6 +17,7 @@ public class SpainController : MonoBehaviour
     public DateTime LastTime ;
     public bool IsTextActive = false;
     private String ObjectName;
+    private Transform It ;
 
     public GameObject Ruler;//主尺   Z 0.8-1.4                                                                                                                              
     public GameObject Reading;//读数窗口
@@ -84,14 +85,17 @@ public class SpainController : MonoBehaviour
         {
             case "Spain_large":
                 ObjectName = "粗螺旋";
+                It = transform;
                 I = 1f/360;
                 break;
-            case "Spain_small":
+            case "Spain_small_":
                 ObjectName = "细螺旋";
+                It = transform.Find("spain");
                 I = 0.01f/360;
                 break;
             default:
                 ObjectName = gameObject.name;
+                It = transform;
                 break;
         }
     }
@@ -101,9 +105,9 @@ public class SpainController : MonoBehaviour
         JudgeIsArrival();
         if (GlobalVariable.ActiveName == gameObject.name)
         {
-            if (GetComponent<MeshRenderer>().material.color != ActiveColor)
+            if (It.GetComponent<MeshRenderer>().material.color != ActiveColor)
             {
-                GetComponent<MeshRenderer>().material.color = ActiveColor;
+                It.GetComponent<MeshRenderer>().material.color = ActiveColor;
             }
             float speed = SPEED;
             if (Input.GetKey(KeyCode.Q))
@@ -112,18 +116,19 @@ public class SpainController : MonoBehaviour
                 {
                     speed = SPEED * 10;
                 }
-                if(GlobalVariable.d - speed * Time.deltaTime  * I > 0)
+                if(GlobalVariable.dis - speed * Time.deltaTime  * I > 0)
                 {
                     angle -= speed * Time.deltaTime;
                     GlobalVariable.d -= speed * Time.deltaTime  * I;
+                    GlobalVariable.dis -= speed * Time.deltaTime  * I;
                     Ruler.transform.Translate(-Vector3.forward * speed * Time.deltaTime * I * (1.4f - 0.8f) / GlobalVariable.MAX/2);
                     Reading.transform.Rotate(new Vector3(0, 0, -speed * Time.deltaTime * I * 360));
                     if (gameObject.name.Contains("small"))
                     {
-                        InchingHandWheel.transform.Rotate(new Vector3(0, 0, -speed * Time.deltaTime * I * 360 / 0.01f));
+                        InchingHandWheel.transform.Rotate(new Vector3(0, speed * Time.deltaTime * I * 360 / 0.01f, 0));
                     }
                     RoughHandWheel.transform.Rotate(new Vector3(0, 0, -speed * Time.deltaTime * I * 360));
-                    SetText(ObjectName + "角度为：" + angle.ToString()+ "    M2读数为：" + GlobalVariable.d.ToString());
+                    SetText(ObjectName + "角度为：" + angle.ToString()+ "    M2读数为：" + GlobalVariable.d.ToString()+"  实际读数： "+GlobalVariable.dis.ToString());
                 } 
 
             }
@@ -134,18 +139,19 @@ public class SpainController : MonoBehaviour
                 {
                     speed = SPEED * 10;
                 }
-                if (GlobalVariable.d + speed * Time.deltaTime  * I < GlobalVariable.MAX)
+                if (GlobalVariable.dis + speed * Time.deltaTime  * I < GlobalVariable.MAX)
                 {
                     angle += speed * Time.deltaTime;
                     GlobalVariable.d += speed * Time.deltaTime  * I;
-                    Ruler.transform.Translate(Vector3.forward * speed * Time.deltaTime * I * (1.4f - 0.8f) / GlobalVariable.MAX / 2);
+                    GlobalVariable.dis += speed * Time.deltaTime  * I;
+                    Ruler.transform.Translate(Vector3.forward * speed * Time.deltaTime * I * (1.419f - 0.815f) / GlobalVariable.MAX / 2);
                     Reading.transform.Rotate(new Vector3(0, 0, speed * Time.deltaTime * I * 360));
                     if (gameObject.name.Contains("small"))
                     {
-                         InchingHandWheel.transform.Rotate(new Vector3(0,0,speed * Time.deltaTime * I * 360 / 0.01f));
+                         InchingHandWheel.transform.Rotate(new Vector3(0, -speed * Time.deltaTime * I * 360 / 0.01f, 0));
                     }
                     RoughHandWheel.transform.Rotate(new Vector3(0,0,speed * Time.deltaTime * I * 360));
-                    SetText(ObjectName + "角度为：" + angle.ToString()+"    M2读数为：" + GlobalVariable.d.ToString());
+                    SetText(ObjectName + "角度为：" + angle.ToString()+"    M2读数为：" + GlobalVariable.d.ToString() + "  实际读数： " + GlobalVariable.dis.ToString());
                 }
 
             }
@@ -167,9 +173,9 @@ public class SpainController : MonoBehaviour
         }
         else
         {
-            if(GetComponent<MeshRenderer>().material.color == ActiveColor)
+            if(It.GetComponent<MeshRenderer>().material.color == ActiveColor)
             {
-                GetComponent<MeshRenderer>().material.color = color;
+                It.GetComponent<MeshRenderer>().material.color = color;
             }
         }
         

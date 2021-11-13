@@ -7,7 +7,7 @@ using UnityEngine.UI;
 
 public class  KnobController: MonoBehaviour
 {
-    public float SPEED = 2;
+    public float SPEED = 0.5f;
     private float angle = 0f;
     public Text txt;
     public DateTime LastTime;
@@ -101,7 +101,6 @@ public class  KnobController: MonoBehaviour
             {
                 GetComponent<MeshRenderer>().material.color = ActiveColor;
             }
-            Debug.Log(M.gameObject.name);
             float speed = SPEED;
             if (Input.GetKey(KeyCode.Q)|| Input.GetKey(KeyCode.E))
             {

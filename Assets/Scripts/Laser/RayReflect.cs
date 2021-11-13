@@ -38,22 +38,38 @@ public class RayReflect : MonoBehaviour
         GlobalVariable.Points[1] = transform.position;
         GlobalVariable.Dirs[0] = transform.forward;
         GlobalVariable.Dirs[1] = transform.forward;
-        GlobalVariable.ISOK[0]= true;
-        GlobalVariable.ISOK[1]= true;
+        GlobalVariable.IsOkList[0]= true;
+        GlobalVariable.IsOkList[1]= true;
     }
 
     private void Update()
     {
-        if (GlobalVariable.ISOK[RayIndex])
+        if (!GlobalVariable.IsOpenLaser)
+        {
+            _lineRender.positionCount = 0;
+            return;
+        }
+        GlobalVariable.Points[0] = transform.position;
+        GlobalVariable.Points[1] = transform.position;
+        GlobalVariable.Dirs[0] = transform.forward;
+        GlobalVariable.Dirs[1] = transform.forward;
+        if (GlobalVariable.IsOkList[RayIndex])
         {
             _renderPoints = new List<Vector3>();
             _renderPoints.Add(GlobalVariable.Points[RayIndex]); //LineRenderer以自己为起点
 
             _renderPoints.AddRange(GetRenderPoints(GlobalVariable.Points[RayIndex], GlobalVariable.Dirs[RayIndex],
                 maxDistance, maxReflectTimes));//获取反射点
+            if (GlobalVariable.isShowPath)
+            {
+                _lineRender.positionCount = _renderPoints.Count;
+                _lineRender.SetPositions(_renderPoints.ToArray());
+            }
+            else
+            {
+                _lineRender.positionCount = 0;
+            }
 
-            _lineRender.positionCount = _renderPoints.Count;
-            _lineRender.SetPositions(_renderPoints.ToArray());
         }
 
     }
@@ -96,33 +112,31 @@ public class RayReflect : MonoBehaviour
         {
             if (!Physics.Raycast(start, dir, out RaycastHit hit, dis))
                 break;
+            
             GameObject target = hit.collider.gameObject;
+            if (target.name== "BeamExpander")
+            {
+                hitPosList.Add(hit.point);
+                break;
+            }
             if (target.name.Contains("Maoboli"))
             {
-                //以防万一，还要确保碰撞器也有一个渲染器、材质和纹理.我们也应该忽略几何体碰撞器.
                 var renderer = hit.collider.GetComponent<Renderer>();
-                var meshCollider = hit.collider as MeshCollider;
-                //if (renderer == null || renderer.sharedMaterial == null ||
-                //    renderer.sharedMaterial.mainTexture == null || meshCollider == null)
-                //{
-
-                //    break;
-                //}
-
+                Texture2D texture = renderer.materials[renderer.materials.Length - 1].mainTexture as Texture2D;
                 //现在在所碰到的物体上绘制一个像素
-                int n = 401;
+                int n = GlobalVariable.R * GlobalVariable.R * 4 + 1;
                 var pixelUV = hit.textureCoord;
                 if (RayIndex==2)
                 {
-                    GlobalVariable.Node[0,0] = (int)(pixelUV.x/meshCollider.bounds.size.y * n);
-                    GlobalVariable.Node[0,1] = (int)(pixelUV.y/meshCollider.bounds.size.z * n);
+                    GlobalVariable.Node[0,0] = (int)(pixelUV.x * texture.width);
+                    GlobalVariable.Node[0,1] = (int)(pixelUV.y * texture.height);
                 }
                 else if(RayIndex==4)
                 {
-                    GlobalVariable.Node[1, 0] = (int)(pixelUV.x / meshCollider.bounds.size.y * n);
-                    GlobalVariable.Node[1, 1] = (int)(pixelUV.y / meshCollider.bounds.size.z * n);
+                    GlobalVariable.Node[1, 0] = (int)(pixelUV.x * texture.width);
+                    GlobalVariable.Node[1, 1] = (int)(pixelUV.y * texture.height);
                 }
-                //Image((int)pixelUV.x, (int)pixelUV.y, Color.black);
+                hitPosList.Add(hit.point);
                 break;
             }
             if (!IsReflect)//折射
@@ -149,7 +163,6 @@ public class RayReflect : MonoBehaviour
                 start = hit.point;
                 dir = reflectDir;
             }
-            //Debug.Log(target.transform.name+" "+dir);
             times--;
         }
         switch (RayIndex+1)
@@ -157,17 +170,17 @@ public class RayReflect : MonoBehaviour
             case 1:
                 GlobalVariable.Dirs[2] = dir;
                 GlobalVariable.Points[2] = start;
-                GlobalVariable.ISOK[2] = true;
+                GlobalVariable.IsOkList[2] = true;
                 break;
             case 2:
                 GlobalVariable.Dirs[3] = -dir;
                 GlobalVariable.Points[3] = start;
-                GlobalVariable.ISOK[3] = true;
+                GlobalVariable.IsOkList[3] = true;
                 break;
             case 4:
                 GlobalVariable.Dirs[4] = dir;
                 GlobalVariable.Points[4] = start;
-                GlobalVariable.ISOK[4] = true;
+                GlobalVariable.IsOkList[4] = true;
                 break;
         }
 

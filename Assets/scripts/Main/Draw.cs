@@ -5,63 +5,77 @@ using UnityEngine.UI;
 public class Draw : MonoBehaviour
 {
     
-    //保存贴图
-    public Image targetMaterial;
-    public bool IsOK = false;
+
+    public Texture2D texture2;
+    public Text text;
+    private Renderer render; 
 
     void Start()
     {
-        targetMaterial.gameObject.GetComponent<RectTransform>().sizeDelta = new Vector2(401,401);
+        render = GetComponent<Renderer>();
     }
 
     //创建设置贴图文件
 
     void Update()
     {
-        if (!GlobalVariable.IsLook) return;
-        if (Input.GetKey(KeyCode.Escape))
+        if (!GlobalVariable.IsOpenLaser)
         {
-            GlobalVariable.IsLook = false;
-            targetMaterial.gameObject.SetActive(false);
+            render.materials[render.materials.Length - 1].mainTexture = texture2;
             return;
         }
-        if(!targetMaterial.gameObject.activeSelf)
-            targetMaterial.gameObject.SetActive(true);
-        int n = 401;
-        Texture2D texture = new Texture2D(n, n);
-        if (IsOK)
+        int n = GlobalVariable.R * GlobalVariable.R * 4 + 1;
+        Texture2D temp = new Texture2D(texture2.width, texture2.height, texture2.format, false);
+        if (GlobalVariable.IsOpenLaser)
         {
-            Chart.Draw(GlobalVariable.R, GlobalVariable.Refractivity, GlobalVariable.WaveLength1, GlobalVariable.WaveLength2, GlobalVariable.d, GlobalVariable.L);
-            
-            
-            double min = Chart.GetMin(Chart.Points);
-            double max = Chart.GetMax(Chart.Points);
-            for (int i = 0; i < Chart.Points.Count; i++)
+            int x1 = GlobalVariable.Node[0, 0];
+            int y1 = GlobalVariable.Node[0, 1];
+            int x2 = GlobalVariable.Node[1, 0];
+            int y2 = GlobalVariable.Node[1, 1];
+            //判断准备工作是否操作好 begin
+            int ToleranceScope = 15;
+            var center = new Vector2(0,0);
+            if(Vector2.Distance(new Vector2(x1, y1), center)<=ToleranceScope*2 &&
+                Vector2.Distance(center, new Vector2(x2, y2)) < ToleranceScope*2 &&
+                Vector2.Distance(new Vector2(x1, y1), new Vector2(x2, y2)) <= ToleranceScope)
             {
-            
-                for (int j = 0; j < Chart.Points[i].Count; j++)
+                GlobalVariable.IsOK = true;
+            }
+            else
+            {
+                GlobalVariable.IsOK = false;
+            }
+            //end
+            if (GlobalVariable.IsOK)
+            {
+                Chart.Draw(GlobalVariable.R, GlobalVariable.Refractivity, GlobalVariable.WaveLength1, GlobalVariable.WaveLength2, GlobalVariable.d, GlobalVariable.L);
+                double min = Chart.GetMin(Chart.Points);
+                double max = Chart.GetMax(Chart.Points);
+                for (int i = 0; i < Chart.Points.Count-1; i++)
                 {
-                    texture.SetPixel(i, j, Chart.GetColorMap(Chart.Points[i][j],min,max) );
+                    for (int j = 0; j < Chart.Points[i].Count-1; j++)
+                    {
+                        temp.SetPixel(i+n/2, j+n/2, texture2.GetPixel(GlobalVariable.Node[0, 0] - i, GlobalVariable.Node[0, 1] - j) + Chart.GetColorMap(Chart.Points[i][j], min, max));
+                    }
                 }
             }
-        }
-        else
-        {
-            Debug.Log(GlobalVariable.Node[0, 0]+" 0 "+ GlobalVariable.Node[0, 1]);
-            for (int i = -25; i <= 25; i++)
+            else
             {
-                for (int j = -25; j <= 25; j++)
+                var data = texture2.GetRawTextureData<Color32>();
+                temp.LoadRawTextureData(data);
+                for (int i = -2; i <= 2; i++)
                 {
-                    texture.SetPixel(GlobalVariable.Node[0,0]-i, GlobalVariable.Node[0,1]-j, Color.red);//画激光
-                    texture.SetPixel(GlobalVariable.Node[1,0]-i, GlobalVariable.Node[1,1]-j, Color.red);//画激光
-                }
-            }
-        }
+                    for (int j = -2; j <= 2; j++)
+                    {
 
-        //应用贴图
-        texture.Apply();
-        //将贴图数据赋值给Image的sprite
-        targetMaterial.sprite = Sprite.Create(texture, new Rect(0, 0, n, n), Vector2.zero); ;
+                        temp.SetPixel(x1 - i, y1 - j, Color.red);
+                        temp.SetPixel(x2 - i, y2 - j, Color.red);
+                    }
+                }
+            }
+        }
+        temp.Apply();
+        render.materials[render.materials.Length - 1].mainTexture = temp;
 
     }
 

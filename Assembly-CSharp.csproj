@@ -54,18 +54,22 @@
   </PropertyGroup>
   <ItemGroup>
     <Compile Include="Assets\Scripts\Camera\CameraController.cs" />
-    <Compile Include="Assets\Scripts\Camera\SimpleCameraController.cs" />
     <Compile Include="Assets\Scripts\GlobalVariable.cs" />
     <Compile Include="Assets\Scripts\Laser\RayReflect.cs" />
     <Compile Include="Assets\Scripts\Main\Chart.cs" />
     <Compile Include="Assets\Scripts\Main\Draw.cs" />
+    <Compile Include="Assets\Scripts\Menu\CalcuteArea.cs" />
+    <Compile Include="Assets\Scripts\Menu\CloseApplication.cs" />
+    <Compile Include="Assets\Scripts\Menu\MyDropDown.cs" />
     <Compile Include="Assets\Scripts\Message\MessageBox.cs" />
     <Compile Include="Assets\Scripts\Message\MessageBoxController.cs" />
     <Compile Include="Assets\Scripts\Mirror\MirrorReflection.cs" />
-    <Compile Include="Assets\Scripts\Move\BeamExpanderController.cs" />
+    <Compile Include="Assets\Scripts\Operate\BeamExpanderController.cs" />
+    <Compile Include="Assets\Scripts\Operate\LaserSwitch.cs" />
     <Compile Include="Assets\Scripts\Ping\PingController.cs" />
     <Compile Include="Assets\Scripts\Screw\KnobController.cs" />
     <Compile Include="Assets\Scripts\Screw\SpainController.cs" />
+    <Compile Include="Assets\Scripts\StartGame.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Assets\Shaders\MirrorShader.shader" />

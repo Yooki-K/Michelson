@@ -24,7 +24,7 @@ public static class Chart
         double Lambda2 = dWave2*1e-6;
         L = L * 10;
         d = Math.Abs(d);
-        int N = r * 40 + 1;  // N设置图像精度
+        int N = r * r*4 + 1;  // N设置图像精度
         List<double> dx = Linspace(-r, r, N);
         List<double> dy = Linspace(-r, r, N);
         NP np = Meshgrid(dx, dy);// 生成坐标二维矩阵
@@ -144,7 +144,7 @@ public static class Chart
     public static Color GetColorMap(double v,double min,double max)
     {
         float temp = (float)((v - min) / (max - min));
-        return new Color(temp*0.8f, temp*0.1f, temp*0.1f,0.5f);
+        return new Color(temp*0.8f, temp*0.1f,temp*0.1f, 0.8f);
     }
     private static void Clear()
     {

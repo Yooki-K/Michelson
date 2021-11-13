@@ -34,20 +34,20 @@ public class MyDropDown : Dropdown
         {
             if (toggle.name.Contains("显示光路"))//撤销
             {
-                
+                GlobalVariable.isShowPath = false;
             }
-            Debug.Log("撤销"+toggle.isOn);
+            Debug.Log("撤销显示光路");
             IsKeep = true;
             toggle.isOn = true;
             return;
         }
         if (!IsKeep )//选中
         {
-            if (toggle.name.Contains("显示光路"))
+            if (toggle.name.Contains(""))
             {
-
+                GlobalVariable.isShowPath = true;
             }
-            Debug.Log("选中" + toggle.isOn);
+            Debug.Log("选中显示光路");
         }
         IsKeep = false;
         int selectedIndex = -1;

@@ -8,6 +8,7 @@ public class CalcuteArea : MonoBehaviour, IPointerEnterHandler, IPointerExitHand
 {
     private GameObject ShowArea;
     private Text Result;
+    private Text Result2;
     private int ShowState = -1;
     public int MaxHeight = 200;
     public int MinWidth = 200;
@@ -19,6 +20,7 @@ public class CalcuteArea : MonoBehaviour, IPointerEnterHandler, IPointerExitHand
     {
         ShowArea = transform.parent.Find("ShowArea").gameObject;
         Result = ShowArea.transform.Find("result").GetComponent<Text>();
+        Result2 = ShowArea.transform.Find("result2").GetComponent<Text>();
         ShowArea.transform.Find("Submit").GetComponent<Button>().onClick.AddListener(Submit);
         ShowArea.transform.Find("Clear").GetComponent<Button>().onClick.AddListener(Clear);
         ShowArea.SetActive(false);
@@ -34,8 +36,9 @@ public class CalcuteArea : MonoBehaviour, IPointerEnterHandler, IPointerExitHand
             double d2 =  double.Parse(ShowArea.transform.GetChild(1).GetComponent<InputField>().text);
             i++;
             int n =  int.Parse(ShowArea.transform.GetChild(2).GetComponent<InputField>().text);
-            Result.text = (2 * Math.Abs(d1-d2) / n).ToString();
-            Debug.Log(n);
+            double result = 2 * Math.Abs(d1 - d2) / n * 1e6;
+            Result.text = (2 * Math.Abs(d1-d2) / n*1e6).ToString();
+            Result2.text = (Math.Round((GlobalVariable.WaveLength1-result) / GlobalVariable.WaveLength1*100,2)).ToString()+"%";
         }
         catch (Exception)
         {
