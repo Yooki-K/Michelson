@@ -19,7 +19,7 @@ public class Draw : MonoBehaviour
 
     void Update()
     {
-        if (!GlobalVariable.IsOpenLaser)
+        if (!GlobalVariable.IsOpenLaser|| !GlobalVariable.IsCross|| !GlobalVariable.IsOn)
         {
             render.materials[render.materials.Length - 1].mainTexture = texture2;
             return;
@@ -43,6 +43,7 @@ public class Draw : MonoBehaviour
             }
             else
             {
+                
                 GlobalVariable.IsOK = false;
             }
             //end

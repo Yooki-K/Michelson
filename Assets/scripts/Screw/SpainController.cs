@@ -46,7 +46,7 @@ public class SpainController : MonoBehaviour
             if (GlobalVariable.ActiveName != gameObject.name)
             {
                 GlobalVariable.ActiveName = gameObject.name;
-                SetText(ObjectName + "角度为：" + angle.ToString());
+                SetText(ObjectName);
             }
             else
             {
@@ -84,12 +84,12 @@ public class SpainController : MonoBehaviour
         switch (gameObject.name)
         {
             case "Spain_large":
-                ObjectName = "粗螺旋";
+                ObjectName = "粗动手轮";
                 It = transform;
                 I = 1f/360;
                 break;
             case "Spain_small_":
-                ObjectName = "细螺旋";
+                ObjectName = "微动手轮";
                 It = transform.Find("spain");
                 I = 0.01f/360;
                 break;
@@ -128,7 +128,11 @@ public class SpainController : MonoBehaviour
                         InchingHandWheel.transform.Rotate(new Vector3(0, speed * Time.deltaTime * I * 360 / 0.01f, 0));
                     }
                     RoughHandWheel.transform.Rotate(new Vector3(0, 0, -speed * Time.deltaTime * I * 360));
-                    SetText(ObjectName + "角度为：" + angle.ToString()+ "    M2读数为：" + GlobalVariable.d.ToString()+"  实际读数： "+GlobalVariable.dis.ToString());
+                    if (GlobalVariable.IsShowTip)
+                    {
+                        SetText(ObjectName + "角度为：" + angle.ToString()+ "，读数为： "+GlobalVariable.dis.ToString());
+                    }
+                    
                 } 
 
             }
@@ -151,7 +155,11 @@ public class SpainController : MonoBehaviour
                          InchingHandWheel.transform.Rotate(new Vector3(0, -speed * Time.deltaTime * I * 360 / 0.01f, 0));
                     }
                     RoughHandWheel.transform.Rotate(new Vector3(0,0,speed * Time.deltaTime * I * 360));
-                    SetText(ObjectName + "角度为：" + angle.ToString()+"    M2读数为：" + GlobalVariable.d.ToString() + "  实际读数： " + GlobalVariable.dis.ToString());
+                    if (GlobalVariable.IsShowTip)
+                    {
+                        SetText(ObjectName + "角度为：" + angle.ToString()+ "，读数为： " + GlobalVariable.dis.ToString());
+                    }
+                    
                 }
 
             }

@@ -19,7 +19,7 @@ public static class GlobalVariable
     //public static float d2;//读数窗口   0.01mm
     //public static float d3;//微动手轮   0.00001mm
     public static float d =0;//波程差           单位mm     精确度0.00001mm
-    public static float dis= 50;//读数           单位mm     精确度0.00001mm
+    public static float dis= 30;//读数           单位mm     精确度0.00001mm
     public static int MAX = 224;//最大主尺长度   单位mm
     public static double WaveLength1= 632.8;//波长1   单位nm
     public static double WaveLength2 = 632.8;//波长2   单位nm
@@ -31,11 +31,14 @@ public static class GlobalVariable
 
     public static string ActiveName ="";
     public static bool IsLook = false;//是否观看放大镜
-    public static bool isShowPath = false;//是否显示光路
+    public static bool IsShowPath = false;//是否显示光路
+    public static bool IsShowTip = false;//是否显示读数提示
     public static bool IsOK = false;//是否准备操作完成
     public static bool IsOpenLaser = false;//是否打开激光
+    public static bool IsOn = false;//是否扩束镜摆放好
+    public static bool IsCross = false;//是否穿过孔
 
-    public static int[,] Node = new int[2,2];
+    public static int[,] Node = new int[2, 2] { {-25,-30 },{36,-30 } };
 
     public static Vector3[] Dirs = new Vector3[5];
     public static Vector3[] Points = new Vector3[5];

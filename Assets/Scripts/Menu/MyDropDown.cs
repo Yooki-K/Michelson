@@ -9,7 +9,7 @@ using UnityEngine.UI;
 public class MyDropDown : Dropdown
 {
     public bool AlwaysCallback = false;//是否开启 点击选项按钮总是回调
-    public bool IsKeep = false;//
+    public bool IsKeep = false;//是否是回调
     
     public int SelectIndexBitMark = 0;// 当前筛选的技能质量标记
 
@@ -32,22 +32,30 @@ public class MyDropDown : Dropdown
 
         if (!toggle.isOn)
         {
-            if (toggle.name.Contains("显示光路"))//撤销
+            if (toggle.name.Contains("光路"))//撤销
             {
-                GlobalVariable.isShowPath = false;
+                GlobalVariable.IsShowPath = false;
             }
-            Debug.Log("撤销显示光路");
+            else if (toggle.name.Contains("读数"))
+            {
+                GlobalVariable.IsShowTip = false;
+            }
+            Debug.Log("撤销");
             IsKeep = true;
             toggle.isOn = true;
             return;
         }
         if (!IsKeep )//选中
         {
-            if (toggle.name.Contains(""))
+            if (toggle.name.Contains("光路"))
             {
-                GlobalVariable.isShowPath = true;
+                GlobalVariable.IsShowPath = true;
             }
-            Debug.Log("选中显示光路");
+            else if (toggle.name.Contains("读数"))
+            {
+                GlobalVariable.IsShowTip = true;
+            }
+            Debug.Log("选中");
         }
         IsKeep = false;
         int selectedIndex = -1;

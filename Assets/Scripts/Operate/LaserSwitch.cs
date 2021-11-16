@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class LaserSwitch : MonoBehaviour
 {
+    private Transform Light;
     //click部分
     //begin
     public bool IsDown = false;
@@ -31,13 +32,15 @@ public class LaserSwitch : MonoBehaviour
                 {
                     s = "打开激光";
                 }
-                MessageBox.Show(new string[] { "请选择对镭射激光进行的操作(ESC键退出)：", s, "激光上移(按shift加速)", "激光下移(按shift加速)"});
+                MessageBox.Show(new string[] { "请选择对HeNe激光器进行的操作(ESC键退出)：", s, "激光上移(按shift加速)", "激光下移(按shift加速)"});
 
                 MessageBox.actions.Add(() =>
                 {
                     Debug.Log(s);
                     GlobalVariable.IsOpenLaser = !GlobalVariable.IsOpenLaser;
+                    Light.gameObject.SetActive(!Light.gameObject.activeInHierarchy);
                     MessageBox.state = -1;
+                    
 
                 });
                 MessageBox.actions.Add(() =>
@@ -60,7 +63,7 @@ public class LaserSwitch : MonoBehaviour
                     
                     if (Input.GetKey(KeyCode.LeftShift))
                     {
-                        transform.Rotate(new Vector3(-speed * 2, 0, 0));
+                        transform.Rotate(new Vector3(speed * 2, 0, 0));
                     }
                     else
                     {
@@ -78,7 +81,7 @@ public class LaserSwitch : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        
+        Light = transform.parent.Find("Point Light");
     }
 
     // Update is called once per frame

@@ -31,6 +31,7 @@ public class BeamExpanderController : MonoBehaviour
                     Debug.Log("归位");
                     transform.position = new Vector3(0.32f, 0, 0);
                     transform.LookAt(Vector3.left);
+                    GlobalVariable.IsOn = false;
                     MessageBox.state = -1;
 
                 });
@@ -39,6 +40,7 @@ public class BeamExpanderController : MonoBehaviour
                     Debug.Log("摆放");
                     transform.position = new Vector3(0, 0, 0);
                     transform.LookAt(Vector3.forward);
+                    GlobalVariable.IsOn = true;
                     MessageBox.state = -1;
 
                 });

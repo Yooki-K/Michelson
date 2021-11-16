@@ -60,7 +60,7 @@ public class RayReflect : MonoBehaviour
 
             _renderPoints.AddRange(GetRenderPoints(GlobalVariable.Points[RayIndex], GlobalVariable.Dirs[RayIndex],
                 maxDistance, maxReflectTimes));//获取反射点
-            if (GlobalVariable.isShowPath)
+            if (GlobalVariable.IsShowPath)
             {
                 _lineRender.positionCount = _renderPoints.Count;
                 _lineRender.SetPositions(_renderPoints.ToArray());
@@ -114,11 +114,14 @@ public class RayReflect : MonoBehaviour
                 break;
             
             GameObject target = hit.collider.gameObject;
+           
             if (target.name== "BeamExpander")
             {
+                GlobalVariable.IsCross = false;
                 hitPosList.Add(hit.point);
                 break;
             }
+            GlobalVariable.IsCross = true;
             if (target.name.Contains("Maoboli"))
             {
                 var renderer = hit.collider.GetComponent<Renderer>();

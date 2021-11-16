@@ -37,7 +37,6 @@ public class  KnobController: MonoBehaviour
             if (GlobalVariable.ActiveName != gameObject.name)
             {
                 GlobalVariable.ActiveName = gameObject.name;
-                SetText(ObjectName + "角度为：" + angle.ToString());
             }
             else
             {
@@ -130,7 +129,11 @@ public class  KnobController: MonoBehaviour
                     default:
                         break;
                 }
-                SetText(ObjectName + "角度为：" + angle.ToString());
+                if (GlobalVariable.IsShowTip)
+                {
+                    SetText(ObjectName + "角度为：" + angle.ToString());
+                }
+                
 
 
             }
